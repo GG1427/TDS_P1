@@ -56,7 +56,7 @@ async def save_payload(data: Payload):
       return ret
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.post("/", response_class=HTMLResponse)
 async def get_time():
     current_time = datetime.now().strftime("%H:%M:%S")
     html_content = f"""
@@ -70,3 +70,13 @@ async def get_time():
     </html>
     """
     return html_content
+
+
+@app.options("/api")
+async def options_handler():
+    headers = {
+        "Access-Control-Allow-Origin": "*",  # Change "*" to specific origin(s) for production
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "*"
+    }
+    return Response(status_code=204, headers=headers)
