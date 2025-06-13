@@ -66,6 +66,8 @@ async def save_payload(data: Payload):
 
       li = [em["embedding"] for em in response.json()["data"]]
 
+      print(li)
+
       ret = main.fresh_prompt(entry["text"], li) #returns the final response
 
       return ret
