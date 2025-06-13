@@ -47,8 +47,20 @@ def compute_similarity(vectors: list[list[float]]):
     master.sort(key=lambda x: x[1], reverse=True)
     master2.sort(key=lambda x: x[1], reverse=True)
 
-    master_text_and_url = [{"text": contents["data"][i[0] % len(contents)]["text"].split(".")[0], "url": contents["data"][i[0] % len(contents)]["url"]} for i in master]
-    master2_text_and_url = [{"text": contents2["data"][i[0] % len(contents2)]["text"].split(".")[0], "url": "https://discourse.onlinedegree.iitm.ac.in" + contents2["data"][i[0] % len(contents2)]["url"]} for i in master2]
+    master_text_and_url = [
+        {
+            "text": contents["data"][i[0] % len(contents["data"])]["text"].split(".")[0], 
+            "url": contents["data"][i[0] % len(contents["data"])]["url"]
+        }
+        for i in master
+    ]
+    master2_text_and_url = [
+        {
+            "text": contents2["data"][i[0] % len(contents2["data"])]["text"].split(".")[0], 
+            "url": "https://discourse.onlinedegree.iitm.ac.in" + contents2["data"][i[0] % len(contents2["data"])]["url"]
+        } 
+        for i in master2
+    ]
 
     ret = master_text_and_url[:3] + master2_text_and_url[:3]
 
