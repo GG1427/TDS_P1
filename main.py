@@ -53,7 +53,7 @@ def compute_similarity(vectors: list[list[float]]):
     ret = master_text_and_url[:3] + master2_text_and_url[:3]
 
     with open("similarity_results.log", "w", encoding="UTF-8") as f:
-        f.write({"best scores": ret})
+        f.write(str(ret))
 
     return ret
 
