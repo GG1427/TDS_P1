@@ -6,6 +6,9 @@ import requests
 from main import *
 from datetime import datetime
 from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, Response
+from fastapi.responses import JSONResponse
+
 
 app = FastAPI()
 
@@ -75,7 +78,7 @@ async def get_time():
 @app.options("/api")
 async def options_handler():
     headers = {
-        "Access-Control-Allow-Origin": "*",  # Change "*" to specific origin(s) for production
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "*"
     }
