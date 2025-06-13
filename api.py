@@ -42,10 +42,10 @@ async def save_payload(data: Payload):
 
       try:
             response = requests.post("https://api.jina.ai/v1/embeddings", headers=headers, json=output)
-            
+
             if response.status_code != 200:
                   raise Exception("Error from Jina API: " + response.text + ", status code: " + str(response.status_code))
-            
+
       except Exception as e:
             return {"error": "Unable to reach Jina API to process your request.", "details": str(e)}
 
@@ -56,7 +56,7 @@ async def save_payload(data: Payload):
       return ret
 
 
-@app.post("/", response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse)
 async def get_time():
     current_time = datetime.now().strftime("%H:%M:%S")
     html_content = f"""
