@@ -68,7 +68,7 @@ def fresh_prompt(question, li):
     context = ""
     for result in results:
         context += result["text"]
-    return results
+    #return results
 
     AIPIPE_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjEwMDE4MjRAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.6sV4a8Mz_C3YcDH6AbamRY6crXiY6XHT7Zidb7z7zBA"
 
