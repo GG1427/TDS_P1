@@ -75,7 +75,7 @@ async def get_time():
     return html_content
 
 
-@app.options("/api")
+@app.options("/api1")
 async def options_handler():
     headers = {
         "Access-Control-Allow-Origin": "*",
