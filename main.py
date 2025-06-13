@@ -50,7 +50,7 @@ def compute_similarity(vectors: list[list[float]]):
     master_text_and_url = [{"text": contents["data"][i[0] % len(contents)]["text"], "url": contents["data"][i[0] % len(contents)]["url"]} for i in master]
     master2_text_and_url = [{"text": contents2["data"][i[0] % len(contents)]["text"], "url": contents2["data"][i[0] % len(contents)]["url"]} for i in master2]
 
-    return master_text_and_url[:1] + master2_text_and_url[:1]
+    return master_text_and_url[:3] + master2_text_and_url[:3]
 
 
 def cosine_similarity(vec1, vec2):
