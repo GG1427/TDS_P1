@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 import requests
-from main import *
+import main
 from datetime import datetime
 from fastapi.responses import HTMLResponse
 from fastapi import FastAPI, Response
@@ -66,7 +66,7 @@ async def save_payload(data: Payload):
 
       li = [em["embedding"] for em in response.json()["data"]]
 
-      ret = fresh_prompt(entry["text"], li) #returns the final response
+      ret = main.fresh_prompt(entry["text"], li) #returns the final response
 
       return ret
 
