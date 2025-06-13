@@ -84,6 +84,8 @@ def fresh_prompt(question, li):
 
     results = compute_similarity(li)
 
+    print("computed similarity")
+
     context = ""
     for result in results:
         context += result["text"]
