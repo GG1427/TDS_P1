@@ -54,7 +54,7 @@ async def save_payload(data: Payload):
       return ret
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 async def get_time():
     current_time = datetime.now().strftime("%H:%M:%S")
     html_content = f"""
