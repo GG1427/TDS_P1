@@ -21,7 +21,7 @@ def compute_similarity(vectors: list[list[float]]):
 
             #print(f"Processed {counter} entries in master_course.json, out of {len(contents['data'])}")
 
-    #print("master_course.json processed")
+    print("master_course.json processed")
 
     with open("master_discourse.json", "r", encoding="UTF-8") as f:
         contents2 = json.load(f)
@@ -42,7 +42,7 @@ def compute_similarity(vectors: list[list[float]]):
 
             #print(f"Processed {counter2} entries in master_discourse.json, out of {len(contents2['data'])}")
 
-    #print("master_discourse.json processed")
+    print("master_discourse.json processed")
 
     master.sort(key=lambda x: x[1], reverse=True)
     master2.sort(key=lambda x: x[1], reverse=True)
@@ -66,6 +66,8 @@ def compute_similarity(vectors: list[list[float]]):
 
     with open("similarity_results.log", "w", encoding="UTF-8") as f:
         f.write(str(ret))
+
+    print("Similarity processed")
 
     return ret
 
@@ -102,7 +104,7 @@ def fresh_prompt(question, li):
 
     response = requests.post("https://aipipe.org/openai/v1/chat/completions", headers=headers, json=output)
 
-    #return response.json()
+    print("ChatGPT prompted")
 
     answer = response.json()["choices"][0]["message"]["content"]
 
