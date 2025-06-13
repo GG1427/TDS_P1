@@ -24,6 +24,8 @@ class Payload(BaseModel):
 @app.post("/api")
 async def save_payload(data: Payload):
 
+      return {"Greeting": "Hello world!"}
+
       entry = {"text": data.question, "image": data.image or []}
 
       output = {
