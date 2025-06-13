@@ -4,7 +4,7 @@ import requests
 def compute_similarity(vectors: list[list[float]]):
     with open("master_course.json", "r", encoding="UTF-8") as f:
         contents = json.load(f)
-    
+
     counter = 0
 
     master = []
@@ -50,40 +50,26 @@ def compute_similarity(vectors: list[list[float]]):
     master_text_and_url = [{"text": contents["data"][i[0]]["text"], "url": contents["data"][i[0]]["url"]} for i in master]
     master2_text_and_url = [{"text": contents2["data"][i[0]]["text"], "url": contents2["data"][i[0]]["url"]} for i in master2]
 
-    return master_text_and_url[:2] + master2_text_and_url[:2]
+    return master_text_and_url[:1] + master2_text_and_url[:1]
 
 
 def cosine_similarity(vec1, vec2):
-    # Compute dot product
     dot_product = sum(a * b for a, b in zip(vec1, vec2))
-    # Compute magnitudes
     mag1 = sum(a * a for a in vec1) ** 0.5
     mag2 = sum(b * b for b in vec2) ** 0.5
-    # Avoid division by zero
     if mag1 == 0 or mag2 == 0:
         return 0
     return dot_product / (mag1 * mag2)
-
-
-def context():
-    with open("query_vector.json", "r", encoding="UTF-8") as f:
-        input_data = json.load(f)
-
-    results = compute_similarity([input_data["vector"]])
-
-    print("Top 5 results:")
-    for i, result in enumerate(results, start=1):
-        print(f"{i}: {result[0:100]}")
-
 
 def fresh_prompt(question, li):
 
     results = compute_similarity(li)
 
     context = ""
-    for result in enumerate(results, start=1):
+    for result in results:
         context += result["text"]
-    
+    return results
+
     AIPIPE_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjEwMDE4MjRAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.6sV4a8Mz_C3YcDH6AbamRY6crXiY6XHT7Zidb7z7zBA"
 
     headers = {
@@ -97,7 +83,9 @@ def fresh_prompt(question, li):
     output["messages"][0]["content"] += context
     output["messages"][1]["content"] = question
 
-    response = requests.post("https://aipipe.org/openai/v1/responses", headers=headers, json=output)
+    response = requests.post("https://aipipe.org/openai/v1/chat/completions", headers=headers, json=output)
+
+    #return response.json()
 
     answer = response.json()["choices"][0]["message"]["content"]
 

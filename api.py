@@ -24,7 +24,7 @@ class Payload(BaseModel):
 @app.post("/api")
 async def save_payload(data: Payload):
 
-      return {"Greeting": "Hello world!"}
+      #return {"Greeting": "Hello world!"}
 
       entry = {"text": data.question, "image": data.image or []}
 
@@ -49,7 +49,7 @@ async def save_payload(data: Payload):
       except Exception as e:
             return {"error": "Unable to reach Jina API to process your request.", "details": str(e)}
 
-      li = [em["embedding"] for em in response["data"]]
+      li = [em["embedding"] for em in response.json()["data"]]
 
       ret = fresh_prompt(entry["text"], li) #returns the final response
 
