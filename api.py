@@ -4,7 +4,8 @@ from pydantic import BaseModel
 from typing import List, Optional
 import requests
 from main import *
-
+from datetime import datetime
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
@@ -51,3 +52,19 @@ async def save_payload(data: Payload):
       ret = fresh_prompt(entry["text"], li) #returns the final response
 
       return ret
+
+
+@app.get("/", response_class=HTMLResponse)
+async def get_time():
+    current_time = datetime.now().strftime("%H:%M:%S")
+    html_content = f"""
+    <html>
+        <head>
+            <title>Current Time</title>
+        </head>
+        <body style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+            <div style="font-size: 10em; font-family: Arial, sans-serif;">{current_time}</div>
+        </body>
+    </html>
+    """
+    return html_content
