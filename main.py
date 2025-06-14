@@ -47,6 +47,8 @@ def compute_similarity(vectors: list[list[float]]):
     master.sort(key=lambda x: x[1], reverse=True)
     master2.sort(key=lambda x: x[1], reverse=True)
 
+	print("Sorting done")
+
     master_text_and_url = [
         {
             "text": contents["data"][i[0] % len(contents["data"])]["text"].split(".")[0], 
@@ -54,18 +56,23 @@ def compute_similarity(vectors: list[list[float]]):
         }
         for i in master[:3]
     ]
+
+	print("master_text_and_url is setup")
+
     master2_text_and_url = [
         {
             "text": contents2["data"][i[0] % len(contents2["data"])]["text"].split(".")[0], 
             "url": "https://discourse.onlinedegree.iitm.ac.in" + contents2["data"][i[0] % len(contents2["data"])]["url"]
-        } 
+        }
         for i in master2[:3]
     ]
 
+	print("master_text_and_url2 is setup")
+
     ret = master_text_and_url + master2_text_and_url
 
-    with open("similarity_results.log", "w", encoding="UTF-8") as f:
-        f.write(str(ret))
+    #with open("similarity_results.log", "w", encoding="UTF-8") as f:
+        #f.write(str(ret))
 
     print("Similarity processed")
 
