@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List, Optional, Union
 import requests
 import main
 from datetime import datetime
@@ -15,14 +15,14 @@ app = FastAPI()
 app.add_middleware(
       CORSMiddleware,
       allow_origins=["*"],
-      allow_credentials=True,
+      allow_credentials=True
       allow_methods=["*"],
       allow_headers=["*"],
       )
 
 class Payload(BaseModel):
-      question: str
-      image: Optional[str] = None
+    question: str
+    image: Union[str, List[str], None] = None
 
 @app.post("/api")
 async def save_payload(data: Payload):
@@ -34,9 +34,11 @@ async def save_payload(data: Payload):
       if not data.image:
             entry = {"text": data.question}
             input = [{"text": entry["text"]}]
-      else:
+      elif type(data.image) == str:
             entry = {"text": data.question, "image": data.image}
             input = [{"text": entry["text"]}] + [{"image": entry["image"]}]
+      else:
+           input = [{"text": entry["text"]}] + [{"image": entry} for entry in data.image]
 
       print("Query recieved")
       output = {
