@@ -52,17 +52,17 @@ def compute_similarity(vectors: list[list[float]]):
             "text": contents["data"][i[0] % len(contents["data"])]["text"].split(".")[0], 
             "url": contents["data"][i[0] % len(contents["data"])]["url"]
         }
-        for i in master
+        for i in master[:3]
     ]
     master2_text_and_url = [
         {
             "text": contents2["data"][i[0] % len(contents2["data"])]["text"].split(".")[0], 
             "url": "https://discourse.onlinedegree.iitm.ac.in" + contents2["data"][i[0] % len(contents2["data"])]["url"]
         } 
-        for i in master2
+        for i in master2[:3]
     ]
 
-    ret = master_text_and_url[:3] + master2_text_and_url[:3]
+    ret = master_text_and_url + master2_text_and_url
 
     with open("similarity_results.log", "w", encoding="UTF-8") as f:
         f.write(str(ret))
