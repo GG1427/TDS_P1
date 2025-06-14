@@ -38,7 +38,8 @@ async def save_payload(data: Payload):
             entry = {"text": data.question, "image": data.image}
             input = [{"text": entry["text"]}] + [{"image": entry["image"]}]
       else:
-           input = [{"text": entry["text"]}] + [{"image": entry} for entry in data.image]
+           print("Hello from else block")
+           input = [{"text": data.question}] + [{"image": entry} for entry in data.image]
 
       print("Query recieved")
       output = {
