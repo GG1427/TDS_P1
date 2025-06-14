@@ -47,7 +47,7 @@ def compute_similarity(vectors: list[list[float]]):
     master.sort(key=lambda x: x[1], reverse=True)
     master2.sort(key=lambda x: x[1], reverse=True)
 
-	print("Sorting done")
+    print("Sorting done")
 
     master_text_and_url = [
         {
@@ -57,7 +57,7 @@ def compute_similarity(vectors: list[list[float]]):
         for i in master[:3]
     ]
 
-	print("master_text_and_url is setup")
+    print("master_text_and_url is setup")
 
     master2_text_and_url = [
         {
@@ -67,7 +67,7 @@ def compute_similarity(vectors: list[list[float]]):
         for i in master2[:3]
     ]
 
-	print("master_text_and_url2 is setup")
+    print("master_text_and_url2 is setup")
 
     ret = master_text_and_url + master2_text_and_url
 
