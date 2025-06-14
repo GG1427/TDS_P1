@@ -39,6 +39,7 @@ async def save_payload(data: Payload):
             input = [{"text": entry["text"]}] + [{"image": entry["image"]}]
       else:
            print("Hello from else block")
+           entry = {"text": data.question}
            input = [{"text": data.question}] + [{"image": entry} for entry in data.image]
 
       print("Query recieved")
@@ -71,7 +72,7 @@ async def save_payload(data: Payload):
 
       print(li)
 
-      ret = main.fresh_prompt(entry["text"], li) #returns the final response
+      ret = main.fresh_prompt(data.question, li) #returns the final response
 
       return ret
 
